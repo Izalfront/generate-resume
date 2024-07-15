@@ -24,6 +24,7 @@ function ResumePreview({ resumeData }) {
     // Experience
     doc.setFontSize(14);
     doc.text('Experience', 10, 40);
+    doc.line(10, 42, 200, 42);
     let yPos = 50;
     if (Array.isArray(resumeData.experience)) {
       resumeData.experience.forEach((exp) => {
@@ -39,6 +40,7 @@ function ResumePreview({ resumeData }) {
     // Skills
     doc.setFontSize(14);
     doc.text('Skills', 10, yPos);
+    doc.line(10, yPos + 2, 200, yPos + 2);
     doc.setFontSize(10);
     doc.text(resumeData.skills || '', 10, yPos + 10);
 
@@ -46,13 +48,14 @@ function ResumePreview({ resumeData }) {
     yPos += 20;
     doc.setFontSize(14);
     doc.text('Education', 10, yPos);
+    doc.line(10, yPos + 2, 200, yPos + 2);
     if (Array.isArray(resumeData.education)) {
       resumeData.education.forEach((edu) => {
         doc.setFontSize(12);
         doc.text(`${edu.institution} | ${edu.degree}`, 10, yPos + 10);
         doc.setFontSize(10);
         doc.text(edu.graduationDate, 10, yPos + 15);
-        doc.text(edu.achievements, 10, yPos + 20); // Corrected achievements field
+        doc.text(edu.achievements, 10, yPos + 20);
         yPos += 30;
       });
     }
