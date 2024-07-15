@@ -52,7 +52,8 @@ function ResumePreview({ resumeData }) {
         doc.text(`${edu.institution} | ${edu.degree}`, 10, yPos + 10);
         doc.setFontSize(10);
         doc.text(edu.graduationDate, 10, yPos + 15);
-        yPos += 20;
+        doc.text(edu.achievements, 10, yPos + 20); // Corrected achievements field
+        yPos += 30;
       });
     }
 
@@ -60,8 +61,40 @@ function ResumePreview({ resumeData }) {
   };
 
   const generateWord = () => {
-    // Similar to the PDF generation, but using docx library
-    // ... (implement Word document generation here)
+    const doc = new Document();
+    const para = new Paragraph();
+
+    para.addRun(new TextRun(resumeData.name || 'Name').bold().fontSize(20));
+    para.addRun(new TextRun(`\n${resumeData.phone || ''} | ${resumeData.email || ''} | ${resumeData.address || ''}`).fontSize(10));
+    doc.addParagraph(para);
+
+    const experiencePara = new Paragraph('Experience').bold().fontSize(14);
+    doc.addParagraph(experiencePara);
+    if (Array.isArray(resumeData.experience)) {
+      resumeData.experience.forEach((exp) => {
+        const expPara = new Paragraph(`${exp.company} | ${exp.position}`).bold().fontSize(12);
+        expPara.addRun(new TextRun(`\n${exp.duration}\n${exp.description}`).fontSize(10));
+        doc.addParagraph(expPara);
+      });
+    }
+
+    const skillsPara = new Paragraph('Skills').bold().fontSize(14);
+    skillsPara.addRun(new TextRun(`\n${resumeData.skills || ''}`).fontSize(10));
+    doc.addParagraph(skillsPara);
+
+    const educationPara = new Paragraph('Education').bold().fontSize(14);
+    doc.addParagraph(educationPara);
+    if (Array.isArray(resumeData.education)) {
+      resumeData.education.forEach((edu) => {
+        const eduPara = new Paragraph(`${edu.institution} | ${edu.degree}`).bold().fontSize(12);
+        eduPara.addRun(new TextRun(`\n${edu.graduationDate}\n${edu.achievements}`).fontSize(10));
+        doc.addParagraph(eduPara);
+      });
+    }
+
+    Packer.toBlob(doc).then((blob) => {
+      saveAs(blob, 'resume.docx');
+    });
   };
 
   if (!resumeData) {
@@ -76,14 +109,14 @@ function ResumePreview({ resumeData }) {
           {resumeData.phone || ''} | {resumeData.email || ''} | {resumeData.address || ''}
         </p>
 
-        <h2>Experience</h2>
+        <h2 className="experience">Experience</h2>
         {Array.isArray(resumeData.experience) &&
           resumeData.experience.map((exp, index) => (
             <div key={index} className="experience-item">
               <h3>
                 {exp.company} | {exp.position}
               </h3>
-              <p>{exp.duration}</p>
+              <p>Duration: {exp.duration}</p>
               <p>{exp.description}</p>
             </div>
           ))}
@@ -99,8 +132,12 @@ function ResumePreview({ resumeData }) {
                 {edu.institution} | {edu.degree}
               </h3>
               <p>{edu.graduationDate}</p>
+              <p>{edu.achievements}</p>
             </div>
           ))}
+
+        <h2>Achievements</h2>
+        <p>{resumeData.achievements || ''}</p>
       </div>
       <button onClick={generateEditablePDF}>Save as Editable PDF</button>
       <button onClick={generateWord}>Save as Word</button>

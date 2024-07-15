@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './ResumeForm.css';
+
 function ResumeForm({ updateResume }) {
   const [formData, setFormData] = useState({
     name: '',
@@ -9,6 +10,7 @@ function ResumeForm({ updateResume }) {
     experience: [],
     skills: '',
     education: [],
+    achievements: '',
   });
 
   const handleChange = (e) => {
@@ -33,7 +35,7 @@ function ResumeForm({ updateResume }) {
   const addEducation = () => {
     setFormData({
       ...formData,
-      education: [...formData.education, { institution: '', degree: '', graduationDate: '' }],
+      education: [...formData.education, { institution: '', degree: '', graduationDate: '', achievements: '' }],
     });
   };
 
@@ -71,6 +73,7 @@ function ResumeForm({ updateResume }) {
           <input type="text" placeholder="Institution" value={edu.institution} onChange={(e) => updateEducation(index, 'institution', e.target.value)} />
           <input type="text" placeholder="Degree" value={edu.degree} onChange={(e) => updateEducation(index, 'degree', e.target.value)} />
           <input type="text" placeholder="Graduation Date" value={edu.graduationDate} onChange={(e) => updateEducation(index, 'graduationDate', e.target.value)} />
+          <textarea placeholder="Achievements" value={edu.achievements} onChange={(e) => updateEducation(index, 'achievements', e.target.value)}></textarea>
         </div>
       ))}
       <button onClick={addEducation}>Add Education</button>
