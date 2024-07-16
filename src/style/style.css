@@ -94,7 +94,33 @@ body {
 }
 
 @media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+
+  .btn-generate {
+    padding: 12px 25px;
+    font-size: 0.9rem;
+  }
+
+  .card_view {
+    padding: 30px;
+  }
+
   .resume-generator {
     flex-direction: column;
+    padding: 20px;
   }
+
+  .resume-form,
+  .resume-preview {
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.line_down {
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
 }

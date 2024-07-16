@@ -6,6 +6,18 @@ import { saveAs } from 'file-saver';
 import './ResumePreview.css';
 
 function ResumePreview({ resumeData }) {
+  const marginLeft = 10;
+  const marginRight = 200 - 10;
+  const maxWidth = marginRight - marginLeft;
+
+  const addWrappedText = (doc, text, x, y, maxWidth) => {
+    const textLines = doc.splitTextToSize(text, maxWidth);
+    textLines.forEach((line, index) => {
+      doc.text(line, x, y + index * 5);
+    });
+    return y + textLines.length * 5;
+  };
+
   const generateEditablePDF = () => {
     if (!resumeData) {
       alert('Please fill in the resume data first.');
@@ -16,47 +28,48 @@ function ResumePreview({ resumeData }) {
 
     // Header
     doc.setFontSize(20);
-    doc.text(resumeData.name || 'Name', 10, 20);
+    doc.text(resumeData.name || 'Name', marginLeft, 20);
+    doc.line(marginLeft, 42, marginRight, 42);
 
     doc.setFontSize(10);
-    doc.text(`${resumeData.phone || ''} | ${resumeData.email || ''} | ${resumeData.address || ''}`, 10, 30);
+    doc.text(`${resumeData.phone || ''} | ${resumeData.email || ''} | ${resumeData.address || ''}`, marginLeft, 30);
 
     // Experience
     doc.setFontSize(14);
-    doc.text('Experience', 10, 40);
-    doc.line(10, 42, 200, 42);
+    doc.text('Experience', marginLeft, 40);
+    doc.line(marginLeft, 42, marginRight, 42);
     let yPos = 50;
     if (Array.isArray(resumeData.experience)) {
       resumeData.experience.forEach((exp) => {
         doc.setFontSize(12);
-        doc.text(`${exp.company} | ${exp.position}`, 10, yPos);
+        doc.text(`${exp.company} | ${exp.position}`, marginLeft, yPos);
         doc.setFontSize(10);
-        doc.text(exp.duration, 10, yPos + 5);
-        doc.text(exp.description, 10, yPos + 10);
-        yPos += 20;
+        yPos = addWrappedText(doc, exp.duration, marginLeft, yPos + 5, maxWidth);
+        yPos = addWrappedText(doc, exp.description, marginLeft, yPos + 5, maxWidth);
+        yPos += 10;
       });
     }
 
     // Skills
     doc.setFontSize(14);
-    doc.text('Skills', 10, yPos);
-    doc.line(10, yPos + 2, 200, yPos + 2);
+    doc.text('Skills', marginLeft, yPos);
+    doc.line(marginLeft, yPos + 2, marginRight, yPos + 2);
     doc.setFontSize(10);
-    doc.text(resumeData.skills || '', 10, yPos + 10);
+    yPos = addWrappedText(doc, resumeData.skills || '', marginLeft, yPos + 10, maxWidth);
 
     // Education
-    yPos += 20;
+    yPos += 10;
     doc.setFontSize(14);
-    doc.text('Education', 10, yPos);
-    doc.line(10, yPos + 2, 200, yPos + 2);
+    doc.text('Education', marginLeft, yPos);
+    doc.line(marginLeft, yPos + 2, marginRight, yPos + 2);
     if (Array.isArray(resumeData.education)) {
       resumeData.education.forEach((edu) => {
         doc.setFontSize(12);
-        doc.text(`${edu.institution} | ${edu.degree}`, 10, yPos + 10);
+        doc.text(`${edu.institution} | ${edu.degree}`, marginLeft, yPos + 10);
         doc.setFontSize(10);
-        doc.text(edu.graduationDate, 10, yPos + 15);
-        doc.text(edu.achievements, 10, yPos + 20);
-        yPos += 30;
+        yPos = addWrappedText(doc, edu.graduationDate, marginLeft, yPos + 15, maxWidth);
+        yPos = addWrappedText(doc, edu.achievements, marginLeft, yPos + 5, maxWidth);
+        yPos += 20;
       });
     }
 
@@ -124,10 +137,10 @@ function ResumePreview({ resumeData }) {
             </div>
           ))}
 
-        <h2>Skills</h2>
+        <h2 className="line_down">Skills</h2>
         <p>{resumeData.skills || ''}</p>
 
-        <h2>Education</h2>
+        <h2 className="line_down">Education</h2>
         {Array.isArray(resumeData.education) &&
           resumeData.education.map((edu, index) => (
             <div key={index} className="education-item">
@@ -135,12 +148,10 @@ function ResumePreview({ resumeData }) {
                 {edu.institution} | {edu.degree}
               </h3>
               <p>{edu.graduationDate}</p>
+              <h2 className="line_down">Achievements</h2>
               <p>{edu.achievements}</p>
             </div>
           ))}
-
-        <h2>Achievements</h2>
-        <p>{resumeData.achievements || ''}</p>
       </div>
       <button onClick={generateEditablePDF}>Save as Editable PDF</button>
       <button onClick={generateWord}>Save as Word</button>
