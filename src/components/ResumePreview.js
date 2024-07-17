@@ -132,7 +132,7 @@ function ResumePreview({ resumeData }) {
               <h3>
                 {exp.company} | {exp.position}
               </h3>
-              <p>Duration: {exp.duration}</p>
+              <p class="duration-experience">Duration: {exp.duration}</p>
               <p>{exp.description}</p>
             </div>
           ))}
@@ -154,7 +154,7 @@ function ResumePreview({ resumeData }) {
           ))}
       </div>
       <button onClick={generateEditablePDF}>Save as Editable PDF</button>
-      <button onClick={generateWord}>Save as Word</button>
+      {/* <button onClick={generateWord}>Save as Word</button> */}
     </div>
   );
 }
