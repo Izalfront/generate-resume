@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/style.css';
-import { FaFileAlt } from 'react-icons/fa';
 
 function Dashboard() {
   return (
