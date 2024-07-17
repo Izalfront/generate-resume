@@ -1,8 +1,8 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Document, Packer, Paragraph, TextRun } from 'docx';
-import { saveAs } from 'file-saver';
+// import { Document, Packer, Paragraph, TextRun } from 'docx';
+// import { saveAs } from 'file-saver';
 import './ResumePreview.css';
 
 function ResumePreview({ resumeData }) {
@@ -76,42 +76,42 @@ function ResumePreview({ resumeData }) {
     doc.save('editable_resume.pdf');
   };
 
-  const generateWord = () => {
-    const doc = new Document();
-    const para = new Paragraph();
+  // const generateWord = () => {
+  //   const doc = new Document();
+  //   const para = new Paragraph();
 
-    para.addRun(new TextRun(resumeData.name || 'Name').bold().fontSize(20));
-    para.addRun(new TextRun(`\n${resumeData.phone || ''} | ${resumeData.email || ''} | ${resumeData.address || ''}`).fontSize(10));
-    doc.addParagraph(para);
+  //   para.addRun(new TextRun(resumeData.name || 'Name').bold().fontSize(20));
+  //   para.addRun(new TextRun(`\n${resumeData.phone || ''} | ${resumeData.email || ''} | ${resumeData.address || ''}`).fontSize(10));
+  //   doc.addParagraph(para);
 
-    const experiencePara = new Paragraph('Experience').bold().fontSize(14);
-    doc.addParagraph(experiencePara);
-    if (Array.isArray(resumeData.experience)) {
-      resumeData.experience.forEach((exp) => {
-        const expPara = new Paragraph(`${exp.company} | ${exp.position}`).bold().fontSize(12);
-        expPara.addRun(new TextRun(`\n${exp.duration}\n${exp.description}`).fontSize(10));
-        doc.addParagraph(expPara);
-      });
-    }
+  //   const experiencePara = new Paragraph('Experience').bold().fontSize(14);
+  //   doc.addParagraph(experiencePara);
+  //   if (Array.isArray(resumeData.experience)) {
+  //     resumeData.experience.forEach((exp) => {
+  //       const expPara = new Paragraph(`${exp.company} | ${exp.position}`).bold().fontSize(12);
+  //       expPara.addRun(new TextRun(`\n${exp.duration}\n${exp.description}`).fontSize(10));
+  //       doc.addParagraph(expPara);
+  //     });
+  //   }
 
-    const skillsPara = new Paragraph('Skills').bold().fontSize(14);
-    skillsPara.addRun(new TextRun(`\n${resumeData.skills || ''}`).fontSize(10));
-    doc.addParagraph(skillsPara);
+  //   const skillsPara = new Paragraph('Skills').bold().fontSize(14);
+  //   skillsPara.addRun(new TextRun(`\n${resumeData.skills || ''}`).fontSize(10));
+  //   doc.addParagraph(skillsPara);
 
-    const educationPara = new Paragraph('Education').bold().fontSize(14);
-    doc.addParagraph(educationPara);
-    if (Array.isArray(resumeData.education)) {
-      resumeData.education.forEach((edu) => {
-        const eduPara = new Paragraph(`${edu.institution} | ${edu.degree}`).bold().fontSize(12);
-        eduPara.addRun(new TextRun(`\n${edu.graduationDate}\n${edu.achievements}`).fontSize(10));
-        doc.addParagraph(eduPara);
-      });
-    }
+  //   const educationPara = new Paragraph('Education').bold().fontSize(14);
+  //   doc.addParagraph(educationPara);
+  //   if (Array.isArray(resumeData.education)) {
+  //     resumeData.education.forEach((edu) => {
+  //       const eduPara = new Paragraph(`${edu.institution} | ${edu.degree}`).bold().fontSize(12);
+  //       eduPara.addRun(new TextRun(`\n${edu.graduationDate}\n${edu.achievements}`).fontSize(10));
+  //       doc.addParagraph(eduPara);
+  //     });
+  //   }
 
-    Packer.toBlob(doc).then((blob) => {
-      saveAs(blob, 'resume.docx');
-    });
-  };
+  //   Packer.toBlob(doc).then((blob) => {
+  //     saveAs(blob, 'resume.docx');
+  //   });
+  // };
 
   if (!resumeData) {
     return <div className="resume-preview">No resume data available.</div>;
