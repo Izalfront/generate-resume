@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+## Generate Resume with React Js
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project allows you to generate a professional resume using React.js. It supports both mobile and desktop devices, ensuring a seamless experience across platforms.
 
-## Available Scripts
+### Page Greeting
 
-In the project directory, you can run:
+The greeting page welcomes users to the resume generator.
 
-### `npm start`
+![Generate Resume Greeting](https://github.com/user-attachments/assets/f280a458-4cf6-4753-a20c-a989d1188388)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Dashboard: Input and Preview Resume
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The dashboard page allows users to input their details and preview the resume in real-time.
 
-### `npm test`
+![Generate Resume Input](https://github.com/user-attachments/assets/3052473c-aee4-404b-895c-2e38a544b0b5)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### PDF Result
 
-### `npm run build`
+This is the final resume result, which can be downloaded as a PDF.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Generate Resume Result](https://github.com/user-attachments/assets/07edf9ef-7cad-4b73-822f-a56278f4a478)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Experience the ease of creating a polished resume with our user-friendly interface, designed for both mobile and desktop users.
